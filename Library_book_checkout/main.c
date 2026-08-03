@@ -12,28 +12,30 @@ int main(void) {
     int book_ID;
 
     do {
-        case 1:
-            display_books(books, NUMBER_OF_BOOKS);
-            break;
-        
-        case 2:
-            printf("Please enter the book ID");
-            scanf("%d", book_ID);
-            result = checkout_book(books, NUMBER_OF_BOOKS, book_ID);
-            if (result == 1) {
-                printf("Book with id %d checked out successfully\n", book_ID);
-            }
-            else if (result == 0) {
-                printf("Book with id %d is already checked out\n", book_ID);
-            }
-            else {
-                printf("Invalid\n")
-            }
+        switch (choice){
+            case 1:
+                display_books(books, NUMBER_OF_BOOKS);
+                break;
+            
+            case 2:
+                printf("Please enter the book ID");
+                scanf("%d", &book_ID);
+                result = checkout_book(books, NUMBER_OF_BOOKS, book_ID);
+                if (result == 1) {
+                    printf("Book with id %d checked out successfully\n", book_ID);
+                }
+                else if (result == 0) {
+                    printf("Book with id %d is already checked out\n", book_ID);
+                }
+                else {
+                    printf("Invalid\n");
+                }
+    
+            default:
+                printf("Good bye!\n");
+        }
 
-        default:
-            printf("Good bye!\n")
-
-    } while (choice >= 0 && choice < 2)
+    } while (choice >= 0 && choice < 2);
 
     return 0;
 }
