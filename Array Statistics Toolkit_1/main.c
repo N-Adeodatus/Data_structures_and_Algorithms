@@ -8,6 +8,7 @@ float average_array(int arr[], int size);
 int min_array(int arr[], int size);
 int max_array(int arr[], int size);
 int linear_search(int arr[], int size, int target);
+void sort_array(int arr[], int size);
 
 int main(void)
 {
@@ -41,6 +42,10 @@ int main(void)
     {
         printf("67 not found\n");
     }
+
+    sort_array(numbers, ARRAY_SIZE);
+    printf("Sorted: ");
+    print_array(numbers, ARRAY_SIZE);
 
     return 0;
 }
@@ -120,4 +125,29 @@ int linear_search(int arr[], int size, int target)
     }
 
     return -1;
+}
+
+void sort_array(int arr[], int size)
+{
+    int i, j, min_idx, temp;
+
+    for (i = 0; i < size - 1; i++)
+    {
+        min_idx = i;
+
+        for (j = i + 1; j < size; j++)
+        {
+            if (arr[j] < arr[min_idx])
+            {
+                min_idx = j;
+            }
+        }
+
+        if (min_idx != i)
+        {
+            temp = arr[i];
+            arr[i] = arr[min_idx];
+            arr[min_idx] = temp;
+        }
+    }
 }
