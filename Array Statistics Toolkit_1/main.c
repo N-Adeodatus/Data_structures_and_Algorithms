@@ -12,13 +12,22 @@ void sort_array(int arr[], int size);
 
 int main(void)
 {
-    int numbers[ARRAY_SIZE] = {23, 4, 67, 12, 89};
+    int numbers[ARRAY_SIZE];
+    int i;
     int total;
     float avg;
     int smallest;
     int largest;
     int index;
+    int target;
 
+    printf("Enter %d integers:\n", ARRAY_SIZE);
+    for (i = 0; i < ARRAY_SIZE; i++)
+    {
+        scanf("%d", &numbers[i]);
+    }
+
+    printf("You entered: ");
     print_array(numbers, ARRAY_SIZE);
 
     total = sum_array(numbers, ARRAY_SIZE);
@@ -33,14 +42,17 @@ int main(void)
     largest = max_array(numbers, ARRAY_SIZE);
     printf("Max: %d\n", largest);
 
-    index = linear_search(numbers, ARRAY_SIZE, 67);
+    printf("Enter a value to search for: ");
+    scanf("%d", &target);
+
+    index = linear_search(numbers, ARRAY_SIZE, target);
     if (index != -1)
     {
-        printf("Found 67 at index %d\n", index);
+        printf("Found %d at index %d\n", target, index);
     }
     else
     {
-        printf("67 not found\n");
+        printf("%d not found\n", target);
     }
 
     sort_array(numbers, ARRAY_SIZE);
