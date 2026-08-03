@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-#define NUMBER_OF_BOOKS = 5
+#define NUMBER_OF_BOOKS 5
 
 void display_books(int books_arr[], int size);
 
@@ -12,6 +12,6 @@ int main(void) {
 
 void display_books(int books_arr[], int size) {
     for(int i = 0; i < size -1; i++ ) {
-        printf("book ID %d is %s", i + 1, books[i] == 0 ? "available" : "not available");
+        printf("book ID %d is %s", i + 1, books_arr[i] == 0 ? "available" : "not available");
     }
 }
