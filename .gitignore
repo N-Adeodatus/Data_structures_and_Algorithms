@@ -1,0 +1,19 @@
+# Compiled executables (Windows)
+*.exe
+
+# Compiled executables (Linux / Mac — no extension)
+# Ignores any file with no extension that is executable
+# List known compiled output files explicitly:
+Multi_Dimensional_Arrays/classroom_attendance_tracker/class_attendance_tracker
+
+# Object files
+*.o
+*.obj
+
+# Debug / build artifacts
+*.out
+*.a
+*.lib
+*.dll
+*.so
+*.pdb
