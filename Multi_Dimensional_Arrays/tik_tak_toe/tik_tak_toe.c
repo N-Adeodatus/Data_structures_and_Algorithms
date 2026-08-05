@@ -14,26 +14,34 @@ int check_draw(void);
 
 int main(void) {
     init_board();
-    print_board();
 
-    int row, col;
-    get_move(&row, &col);
+    char current_player = 'X';
+    char winner = ' ';
 
-    if (place_move(row, col, 'X')) {
-        printf("Move placed successfully.\n");
-    } else {
-        printf("Invalid move.\n");
+    while (winner == ' ' && !check_draw()) {
+        print_board();
+
+        int row, col;
+        get_move(&row, &col);
+
+        if (!place_move(row, col, current_player)) {
+            printf("Invalid move, try again.\n");
+            continue;
+        }
+
+        winner = check_win();
+
+        if (winner == ' ') {
+            current_player = (current_player == 'X') ? 'O' : 'X';
+        }
     }
 
     print_board();
 
-    char winner = check_win();
     if (winner != ' ') {
         printf("%c wins!\n", winner);
-    } else if (check_draw()) {
-        printf("It's a draw!\n");
     } else {
-        printf("No winner yet.\n");
+        printf("It's a draw!\n");
     }
 
     return 0;
