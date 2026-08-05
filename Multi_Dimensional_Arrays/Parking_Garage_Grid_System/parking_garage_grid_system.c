@@ -12,14 +12,28 @@ int park_car(int level, int spot);
 
 int main(void) {
     init_garage();
-    print_garage();
 
-    if (park_car(1, 2)) {
-        printf("Car parked successfully.\n");
-    } else {
-        printf("Unable to park car.\n");
+    while (1) {
+        print_garage();
+
+        int level, spot;
+        printf("\nEnter level and spot to park (level -1 to quit): ");
+        scanf("%d", &level);
+
+        if (level == -1) {
+            break;
+        }
+
+        scanf("%d", &spot);
+
+        if (park_car(level, spot)) {
+            printf("Car parked successfully.\n");
+        } else {
+            printf("Unable to park there. Spot may be invalid or occupied.\n");
+        }
     }
 
+    printf("\nFinal garage state:\n");
     print_garage();
 
     return 0;
