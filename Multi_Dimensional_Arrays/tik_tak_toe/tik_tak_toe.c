@@ -7,10 +7,16 @@ char board[BOARD_SIZE][BOARD_SIZE];
 /* Function prototypes */
 void init_board(void);
 void print_board(void);
+void get_move(int *row, int *col);
 
 int main(void) {
     init_board();
     print_board();
+
+    int row, col;
+    get_move(&row, &col);
+    printf("You entered row %d, col %d\n", row, col);
+
     return 0;
 }
 
@@ -43,4 +49,9 @@ void print_board(void) {
             printf("\n");
         }
     }
+}
+
+void get_move(int *row, int *col) {
+    printf("Enter row and column (0-2 0-2): ");
+    scanf("%d %d", row, col);
 }
