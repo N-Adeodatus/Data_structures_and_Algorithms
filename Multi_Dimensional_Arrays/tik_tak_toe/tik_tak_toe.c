@@ -10,6 +10,7 @@ void print_board(void);
 void get_move(int *row, int *col);
 int place_move(int row, int col, char symbol);
 char check_win(void);
+int check_draw(void);
 
 int main(void) {
     init_board();
@@ -29,6 +30,8 @@ int main(void) {
     char winner = check_win();
     if (winner != ' ') {
         printf("%c wins!\n", winner);
+    } else if (check_draw()) {
+        printf("It's a draw!\n");
     } else {
         printf("No winner yet.\n");
     }
@@ -104,4 +107,15 @@ char check_win(void) {
     }
 
     return ' ';
+}
+
+int check_draw(void) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            if (board[i][j] == ' ') {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
