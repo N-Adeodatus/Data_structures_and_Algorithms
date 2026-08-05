@@ -9,6 +9,7 @@ void init_board(void);
 void print_board(void);
 void get_move(int *row, int *col);
 int place_move(int row, int col, char symbol);
+char check_win(void);
 
 int main(void) {
     init_board();
@@ -24,6 +25,13 @@ int main(void) {
     }
 
     print_board();
+
+    char winner = check_win();
+    if (winner != ' ') {
+        printf("%c wins!\n", winner);
+    } else {
+        printf("No winner yet.\n");
+    }
 
     return 0;
 }
@@ -73,4 +81,27 @@ int place_move(int row, int col, char symbol) {
     }
     board[row][col] = symbol;
     return 1;
+}
+
+char check_win(void) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+            return board[i][0];
+        }
+    }
+
+    for (int j = 0; j < BOARD_SIZE; j++) {
+        if (board[0][j] != ' ' && board[0][j] == board[1][j] && board[1][j] == board[2][j]) {
+            return board[0][j];
+        }
+    }
+
+    if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        return board[0][0];
+    }
+    if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        return board[0][2];
+    }
+
+    return ' ';
 }
