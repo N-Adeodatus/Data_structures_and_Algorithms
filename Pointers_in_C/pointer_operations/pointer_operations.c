@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void swap(int *a, int *b);
 int my_strlen(const char *s);
 char *my_strcpy(char *dest, const char *src);
 void reverse_array(int *arr, int size);
+int find_max(int *arr, int size);
+int *create_array(int size);
 
 int main(void)
 {
@@ -37,6 +40,20 @@ int main(void)
     for (i = 0; i < 5; i++)
         printf(" %d", numbers[i]);
     printf("\n");
+
+    int scores[6] = {42, 17, 99, 3, 88, 56};
+    printf("Max value: %d\n", find_max(scores, 6));
+
+    int *dynamic = create_array(4);
+    if (dynamic != NULL)
+    {
+        printf("Dynamic array:");
+        for (i = 0; i < 4; i++)
+            printf(" %d", dynamic[i]);
+        printf("\n");
+        free(dynamic);
+        dynamic = NULL;
+    }
 
     return (0);
 }
@@ -88,4 +105,33 @@ void reverse_array(int *arr, int size)
         left++;
         right--;
     }
+}
+
+int find_max(int *arr, int size)
+{
+    int *p = arr;
+    int max = *p;
+    int *end = arr + size;
+
+    while (p < end)
+    {
+        if (*p > max)
+            max = *p;
+        p++;
+    }
+    return (max);
+}
+
+int *create_array(int size)
+{
+    int *arr = malloc(size * sizeof(int));
+    int i;
+
+    if (arr == NULL)
+        return (NULL);
+
+    for (i = 0; i < size; i++)
+        arr[i] = i;
+
+    return (arr);
 }
