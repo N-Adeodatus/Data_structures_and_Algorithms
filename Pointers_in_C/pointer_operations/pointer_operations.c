@@ -2,6 +2,7 @@
 
 void swap(int *a, int *b);
 int my_strlen(const char *s);
+char *my_strcpy(char *dest, const char *src);
 
 int main(void)
 {
@@ -16,6 +17,10 @@ int main(void)
 
     const char *word = "pointers";
     printf("Length of \"%s\" is %d\n", word, my_strlen(word));
+
+    char buffer[20];
+    my_strcpy(buffer, word);
+    printf("Copied string: %s\n", buffer);
 
     return (0);
 }
@@ -37,4 +42,18 @@ int my_strlen(const char *s)
         s++;
     }
     return (len);
+}
+
+char *my_strcpy(char *dest, const char *src)
+{
+    char *original_dest = dest;
+
+    while (*src != '\0')
+    {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';
+    return (original_dest);
 }
