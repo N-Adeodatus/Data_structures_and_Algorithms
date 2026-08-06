@@ -1,7 +1,7 @@
 #include<stdio.h>
-#define SIZE 30
+#define SIZE 60
 
-int count_words(char *sentence, size);
+int count_words(char *sentence, int size);
 int main(void) {
     char sentence1[SIZE] = "mango is a delicious fruit";
     char sentence2[SIZE] = "A computer is a useful tool";
@@ -13,19 +13,20 @@ int main(void) {
     printf("Sentence1: %s\n", sentence1);
     printf("The number of words in sentence1 is: %d\n", count_words(sentence1, SIZE));
 
-    return 0
+    return 0;
 }
 
-int count_words(char *sentence, size) {
+int count_words(char *sentence, int size) {
     int word_count = 0;
-    int counter = 0
+    int counter = 0;
 
     while(counter < size) {
-        if (*sentence + counter == ' ') {
-            word_count++
+        if (*sentence == ' ' || counter == size - 1) {
+            word_count++;
         }
-        counter++
+        counter++;
+        sentence++;
     }
 
-    return word_count
+    return word_count;
 }
