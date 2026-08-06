@@ -3,6 +3,7 @@
 void swap(int *a, int *b);
 int my_strlen(const char *s);
 char *my_strcpy(char *dest, const char *src);
+void reverse_array(int *arr, int size);
 
 int main(void)
 {
@@ -21,6 +22,21 @@ int main(void)
     char buffer[20];
     my_strcpy(buffer, word);
     printf("Copied string: %s\n", buffer);
+
+    int numbers[5] = {1, 2, 3, 4, 5};
+    int i;
+
+    printf("Before reverse:");
+    for (i = 0; i < 5; i++)
+        printf(" %d", numbers[i]);
+    printf("\n");
+
+    reverse_array(numbers, 5);
+
+    printf("After reverse: ");
+    for (i = 0; i < 5; i++)
+        printf(" %d", numbers[i]);
+    printf("\n");
 
     return (0);
 }
@@ -56,4 +72,20 @@ char *my_strcpy(char *dest, const char *src)
     }
     *dest = '\0';
     return (original_dest);
+}
+
+void reverse_array(int *arr, int size)
+{
+    int *left = arr;
+    int *right = arr + (size - 1);
+    int temp;
+
+    while (left < right)
+    {
+        temp = *left;
+        *left = *right;
+        *right = temp;
+        left++;
+        right--;
+    }
 }
