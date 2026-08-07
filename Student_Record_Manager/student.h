@@ -10,5 +10,6 @@ struct student
 
 void print_student(struct student s);
 void print_all_students(struct student arr[], int count);
+struct student *find_student_by_name(struct student arr[], int count, char *name);
 
 #endif /* STUDENT_H */

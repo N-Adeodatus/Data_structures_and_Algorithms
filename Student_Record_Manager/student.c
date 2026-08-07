@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "student.h"
 
 /**
@@ -26,4 +27,24 @@ void print_all_students(struct student arr[], int count)
         print_student(arr[i]);
         printf("---\n");
     }
+}
+
+/**
+ * find_student_by_name - searches an array of students by name
+ * @arr: the array of students
+ * @count: number of students in the array
+ * @name: the name to search for
+ *
+ * Return: pointer to the matching student, or NULL if not found
+ */
+struct student *find_student_by_name(struct student arr[], int count, char *name)
+{
+    int i;
+
+    for (i = 0; i < count; i++)
+    {
+        if (strcmp(arr[i].name, name) == 0)
+            return (&arr[i]);
+    }
+    return (NULL);
 }
