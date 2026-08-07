@@ -1,5 +1,5 @@
 #include<stdio.h>
-#define LENGTH 5
+#define LENGTH 3
 
 struct book {
     char title[100];
@@ -8,7 +8,7 @@ struct book {
 };
 
 void print_books();
-float total_inventory_value(struct list_of_books[], size);
+float total_inventory_value(struct book list_of_books[], int size);
 
 int main(void) {
     float sum;
@@ -17,9 +17,9 @@ int main(void) {
         {"Atomic Habit", "James", 5.2},
         {"Art of War", "Sun Tzu", 7.0}
     };
-    print_books(books_list, , LENGTH);
+    print_books(books_list, LENGTH);
     sum = total_inventory_value(books_list, LENGTH);
-    printf("The sum of all books' prices is : %.2f", sum);
+    printf("The sum of all books' prices is : %.2f\n", sum);
     return 0;
 }
 
@@ -30,10 +30,10 @@ void print_books(struct book list_of_books[], int length) {
     }
 }
 
-float total_inventory_value(struct list_of_books[], size) {
+float total_inventory_value(struct book list_of_books[], int size) {
     float total = 0;
-    for(int i = 0; i < length; i++) {
+    for(int i = 0; i < size; i++) {
         total = total + list_of_books[i].price;
     }
-    return total
+    return total;
 }
