@@ -2,6 +2,7 @@
 #define SIZE 60
 
 int count_words(char *sentence, int size);
+char *find_longest_word(const char *string, int *length);
 int main(void) {
     char sentence1[SIZE] = "mango is a delicious fruit";
     char sentence2[SIZE] = "A computer is a useful tool";
@@ -29,4 +30,22 @@ int count_words(char *sentence, int size) {
     }
 
     return word_count;
+}
+
+char *find_longest_word(const char *string, int *length) {
+    int number_of_characters = 0;
+    int max_number_of_characters = 0
+    char *start_of_max_word = string
+    char *pointer_to_current_char = string
+
+    while(*string != '\0') {
+        number_of_characters++;
+        pointer_to_current_char++;
+        
+        if()
+        if(number_of_characters > max_number_of_characters) {
+            max_number_of_characters = number_of_characters;
+            
+        }
+    }
 }
