@@ -1,33 +1,50 @@
 #include <stdio.h>
+#include <string.h>
 #include "student.h"
 
 /**
- * main - entry point, builds a student array, prints all, then searches
- *
- * Return: 0 on success
+ * print_student - prints the details of a single student
+ * @s: the student struct to print
  */
-int main(void)
+void print_student(struct student s)
 {
-    struct student students[3] = {
-        {"Alice", 20, 87.5},
-        {"Bob", 22, 91.0},
-        {"Carol", 19, 76.25}
-    };
-    struct student *found;
+    printf("Name: %s\n", s.name);
+    printf("Age: %d\n", s.age);
+    printf("Grade: %.2f\n", s.grade);
+}
 
-    print_all_students(students, 3);
+/**
+ * print_all_students - prints every student in an array
+ * @arr: the array of students
+ * @count: number of students in the array
+ */
+void print_all_students(struct student arr[], int count)
+{
+    int i;
 
-    found = find_student_by_name(students, 3, "Bob");
-
-    if (found != NULL)
+    for (i = 0; i < count; i++)
     {
-        printf("Found:\n");
-        print_student(*found);
+        print_student(arr[i]);
+        printf("---\n");
     }
-    else
-    {
-        printf("Student not found.\n");
-    }
+}
 
-    return (0);
+/**
+ * find_student_by_name - searches an array of students by name
+ * @arr: the array of students
+ * @count: number of students in the array
+ * @name: the name to search for
+ *
+ * Return: pointer to the matching student, or NULL if not found
+ */
+struct student *find_student_by_name(struct student arr[], int count, char *name)
+{
+    int i;
+
+    for (i = 0; i < count; i++)
+    {
+        if (strcmp(arr[i].name, name) == 0)
+            return (&arr[i]);
+    }
+    return (NULL);
 }
