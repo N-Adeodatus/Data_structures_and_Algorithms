@@ -1,7 +1,7 @@
 #include "student.h"
 
 /**
- * main - entry point, creates an array of students and prints one
+ * main - entry point, creates an array of students and prints all of them
  *
  * Return: 0 on success
  */
@@ -13,7 +13,7 @@ int main(void)
         {"Carol", 19, 76.25}
     };
 
-    print_student(students[0]);
+    print_all_students(students, 3);
 
     return (0);
 }
