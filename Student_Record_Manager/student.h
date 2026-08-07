@@ -9,5 +9,6 @@ struct student
 };
 
 void print_student(struct student s);
+void print_all_students(struct student arr[], int count);
 
 #endif /* STUDENT_H */
