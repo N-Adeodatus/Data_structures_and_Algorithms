@@ -17,6 +17,7 @@ song_t *create_node(char *title, int duration);
 song_t *insert_front(song_t **head, char *title, int duration);
 song_t *insert_back(song_t **head, song_t **tail, char *title, int duration);
 void print_forward(song_t *head);
+void print_backward(song_t *tail);
 
 int main(void)
 {
@@ -104,5 +105,14 @@ void print_forward(song_t *head)
     {
         printf("%s (%d sec)\n", head->title, head->duration);
         head = head->next;
+    }
+}
+
+void print_backward(song_t *tail)
+{
+    while (tail != NULL)
+    {
+        printf("%s (%d sec)\n", tail->title, tail->duration);
+        tail = tail->prev;
     }
 }
