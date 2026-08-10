@@ -15,6 +15,7 @@ typedef struct song_s
 
 song_t *create_node(char *title, int duration);
 song_t *insert_front(song_t **head, char *title, int duration);
+song_t *insert_back(song_t **head, song_t **tail, char *title, int duration);
 
 int main(void)
 {
@@ -72,6 +73,26 @@ song_t *insert_front(song_t **head, char *title, int duration)
         (*head)->prev = new_node;
 
     *head = new_node;
+
+    return (new_node);
+}
+
+song_t *insert_back(song_t **head, song_t **tail, char *title, int duration)
+{
+    song_t *new_node;
+
+    new_node = create_node(title, duration);
+    if (new_node == NULL)
+        return (NULL);
+
+    new_node->prev = *tail;
+
+    if (*tail != NULL)
+        (*tail)->next = new_node;
+    else
+        *head = new_node;
+
+    *tail = new_node;
 
     return (new_node);
 }
