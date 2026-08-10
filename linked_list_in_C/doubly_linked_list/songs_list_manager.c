@@ -16,6 +16,7 @@ typedef struct song_s
 song_t *create_node(char *title, int duration);
 song_t *insert_front(song_t **head, char *title, int duration);
 song_t *insert_back(song_t **head, song_t **tail, char *title, int duration);
+void print_forward(song_t *head);
 
 int main(void)
 {
@@ -95,4 +96,13 @@ song_t *insert_back(song_t **head, song_t **tail, char *title, int duration)
     *tail = new_node;
 
     return (new_node);
+}
+
+void print_forward(song_t *head)
+{
+    while (head != NULL)
+    {
+        printf("%s (%d sec)\n", head->title, head->duration);
+        head = head->next;
+    }
 }
