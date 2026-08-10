@@ -13,7 +13,7 @@ typedef struct song_s
 
 /* ----- Function prototypes ----- */
 
-/* (we'll add these as we build each function) */
+song_t *create_node(char *title, int duration);
 
 int main(void)
 {
@@ -22,4 +22,37 @@ int main(void)
 
 /* ----- Function definitions ----- */
 
-/* (we'll add these as we build each function) */
+song_t *create_node(char *title, int duration)
+{
+    song_t *new_node;
+    int i;
+
+    new_node = malloc(sizeof(song_t));
+    if (new_node == NULL)
+        return (NULL);
+
+    i = 0;
+    while (title[i] != '\0')
+        i++;
+
+    new_node->title = malloc(sizeof(char) * (i + 1));
+    if (new_node->title == NULL)
+    {
+        free(new_node);
+        return (NULL);
+    }
+
+    i = 0;
+    while (title[i] != '\0')
+    {
+        new_node->title[i] = title[i];
+        i++;
+    }
+    new_node->title[i] = '\0';
+
+    new_node->duration = duration;
+    new_node->next = NULL;
+    new_node->prev = NULL;
+
+    return (new_node);
+}
