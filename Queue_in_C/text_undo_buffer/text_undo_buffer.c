@@ -27,21 +27,45 @@ void free_stack(stack_t *s);
 int main(void)
 {
     stack_t s;
+    int choice;
+    char action[ACTION_LEN];
+
     stack_init(&s);
 
-    push(&s, "typed_hello");
-    push(&s, "deleted_line");
-    push(&s, "pasted_text");
+    do {
+        printf("\n--- Undo Buffer ---\n");
+        printf("1. Add action (push)\n");
+        printf("2. Undo last action (pop)\n");
+        printf("3. Peek at last action\n");
+        printf("4. View full history\n");
+        printf("5. Exit\n");
+        printf("Choice: ");
+        scanf("%d", &choice);
 
-    print_stack(&s);
-
-    peek(&s);
-    pop(&s);
-    print_stack(&s);
+        switch (choice) {
+            case 1:
+                printf("Enter action description: ");
+                scanf("%s", action);
+                push(&s, action);
+                break;
+            case 2:
+                pop(&s);
+                break;
+            case 3:
+                peek(&s);
+                break;
+            case 4:
+                print_stack(&s);
+                break;
+            case 5:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+    } while (choice != 5);
 
     free_stack(&s);
-    print_stack(&s);
-
     return 0;
 }
 
