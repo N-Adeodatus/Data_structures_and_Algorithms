@@ -26,6 +26,16 @@ void free_stack(stack_t *s);
 
 int main(void)
 {
-    printf("Stack program skeleton compiled successfully.\n");
+    stack_t s;
+    stack_init(&s);
+
+    printf("Stack initialized. top=%p\n", (void *)s.top);
+
     return 0;
+}
+
+/* Initialize an empty stack by setting top to NULL */
+void stack_init(stack_t *s)
+{
+    s->top = NULL;
 }
