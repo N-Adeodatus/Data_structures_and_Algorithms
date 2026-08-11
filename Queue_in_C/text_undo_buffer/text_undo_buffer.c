@@ -29,10 +29,14 @@ int main(void)
     stack_t s;
     stack_init(&s);
 
+    push(&s, "typed_hello");
+    push(&s, "deleted_line");
+    push(&s, "pasted_text");
+
     if (is_empty(&s))
-        printf("Stack is empty, as expected.\n");
+        printf("Stack is empty.\n");
     else
-        printf("Something's wrong — stack should be empty.\n");
+        printf("Stack has actions. Top: %s\n", s.top->action);
 
     return 0;
 }
@@ -47,4 +51,18 @@ void stack_init(stack_t *s)
 int is_empty(stack_t *s)
 {
     return s->top == NULL;
+}
+
+/* Add a new action to the top of the stack */
+void push(stack_t *s, char *action)
+{
+    node_t *new_node = malloc(sizeof(node_t));
+    if (new_node == NULL)
+        return;
+
+    strncpy(new_node->action, action, ACTION_LEN - 1);
+    new_node->action[ACTION_LEN - 1] = '\0';
+
+    new_node->next = s->top;
+    s->top = new_node;
 }
