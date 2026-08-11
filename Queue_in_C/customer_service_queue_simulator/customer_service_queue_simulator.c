@@ -27,20 +27,41 @@ void free_queue(queue_t *q);
 int main(void)
 {
     queue_t q;
+    int choice;
+    char name[NAME_LEN];
+
     queue_init(&q);
 
-    enqueue(&q, "Alice");
-    enqueue(&q, "Bob");
-    enqueue(&q, "Charlie");
+    do {
+        printf("\n--- Customer Service Queue ---\n");
+        printf("1. Add customer (enqueue)\n");
+        printf("2. Serve next customer (dequeue)\n");
+        printf("3. View queue\n");
+        printf("4. Exit\n");
+        printf("Choice: ");
+        scanf("%d", &choice);
 
-    print_queue(&q);
-
-    dequeue(&q);
-    print_queue(&q);
+        switch (choice) {
+            case 1:
+                printf("Enter customer name: ");
+                scanf("%s", name);
+                enqueue(&q, name);
+                break;
+            case 2:
+                dequeue(&q);
+                break;
+            case 3:
+                print_queue(&q);
+                break;
+            case 4:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+    } while (choice != 4);
 
     free_queue(&q);
-    print_queue(&q);
-
     return 0;
 }
 
