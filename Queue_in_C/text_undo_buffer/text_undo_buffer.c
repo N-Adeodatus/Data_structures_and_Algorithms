@@ -33,10 +33,10 @@ int main(void)
     push(&s, "deleted_line");
     push(&s, "pasted_text");
 
-    if (is_empty(&s))
-        printf("Stack is empty.\n");
-    else
-        printf("Stack has actions. Top: %s\n", s.top->action);
+    print_stack(&s);
+
+    pop(&s);
+    print_stack(&s);
 
     return 0;
 }
@@ -65,4 +65,42 @@ void push(stack_t *s, char *action)
 
     new_node->next = s->top;
     s->top = new_node;
+}
+
+/* Print all actions currently in the stack, from top to bottom */
+void print_stack(stack_t *s)
+{
+    node_t *current = s->top;
+
+    if (is_empty(s)) {
+        printf("Stack is empty.\n");
+        return;
+    }
+
+    printf("Stack (top to bottom): ");
+    while (current != NULL) {
+        printf("%s", current->action);
+        if (current->next != NULL)
+            printf(" -> ");
+        current = current->next;
+    }
+    printf("\n");
+}
+
+/* Remove and undo the action at the top of the stack */
+void pop(stack_t *s)
+{
+    node_t *temp;
+
+    if (is_empty(s)) {
+        printf("Stack is empty. Nothing to undo.\n");
+        return;
+    }
+
+    temp = s->top;
+    printf("Undoing: %s\n", temp->action);
+
+    s->top = s->top->next;
+
+    free(temp);
 }
