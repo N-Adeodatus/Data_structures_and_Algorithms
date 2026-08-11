@@ -35,6 +35,7 @@ int main(void)
 
     print_stack(&s);
 
+    peek(&s);
     pop(&s);
     print_stack(&s);
 
@@ -103,4 +104,15 @@ void pop(stack_t *s)
     s->top = s->top->next;
 
     free(temp);
+}
+
+/* Look at the top action without removing it */
+void peek(stack_t *s)
+{
+    if (is_empty(s)) {
+        printf("Stack is empty. Nothing to peek at.\n");
+        return;
+    }
+
+    printf("Top action: %s\n", s->top->action);
 }
