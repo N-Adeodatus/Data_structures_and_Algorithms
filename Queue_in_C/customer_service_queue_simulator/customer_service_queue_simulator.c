@@ -38,6 +38,9 @@ int main(void)
     dequeue(&q);
     print_queue(&q);
 
+    free_queue(&q);
+    print_queue(&q);
+
     return 0;
 }
 
@@ -112,4 +115,18 @@ void dequeue(queue_t *q)
         q->rear = NULL;
 
     free(temp);
+}
+
+/* Free all remaining nodes in the queue */
+void free_queue(queue_t *q)
+{
+    node_t *temp;
+
+    while (!is_empty(q)) {
+        temp = q->front;
+        q->front = q->front->next;
+        free(temp);
+    }
+
+    q->rear = NULL;
 }
