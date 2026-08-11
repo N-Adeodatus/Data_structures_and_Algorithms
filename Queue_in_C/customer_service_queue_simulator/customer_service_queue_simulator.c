@@ -29,7 +29,10 @@ int main(void)
     queue_t q;
     queue_init(&q);
 
-    printf("Queue initialized. front=%p rear=%p\n", (void *)q.front, (void *)q.rear);
+    if (is_empty(&q))
+        printf("Queue is empty, as expected.\n");
+    else
+        printf("Something's wrong — queue should be empty.\n");
 
     return 0;
 }
@@ -39,4 +42,10 @@ void queue_init(queue_t *q)
 {
     q->front = NULL;
     q->rear = NULL;
+}
+
+/* Check whether the queue has no customers in it */
+int is_empty(queue_t *q)
+{
+    return q->front == NULL;
 }
