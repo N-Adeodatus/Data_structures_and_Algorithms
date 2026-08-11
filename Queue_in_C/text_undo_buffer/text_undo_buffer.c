@@ -29,7 +29,10 @@ int main(void)
     stack_t s;
     stack_init(&s);
 
-    printf("Stack initialized. top=%p\n", (void *)s.top);
+    if (is_empty(&s))
+        printf("Stack is empty, as expected.\n");
+    else
+        printf("Something's wrong — stack should be empty.\n");
 
     return 0;
 }
@@ -38,4 +41,10 @@ int main(void)
 void stack_init(stack_t *s)
 {
     s->top = NULL;
+}
+
+/* Check whether the stack has no actions in it */
+int is_empty(stack_t *s)
+{
+    return s->top == NULL;
 }
