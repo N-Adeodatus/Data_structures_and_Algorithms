@@ -39,6 +39,9 @@ int main(void)
     pop(&s);
     print_stack(&s);
 
+    free_stack(&s);
+    print_stack(&s);
+
     return 0;
 }
 
@@ -115,4 +118,16 @@ void peek(stack_t *s)
     }
 
     printf("Top action: %s\n", s->top->action);
+}
+
+/* Free all remaining nodes in the stack */
+void free_stack(stack_t *s)
+{
+    node_t *temp;
+
+    while (!is_empty(s)) {
+        temp = s->top;
+        s->top = s->top->next;
+        free(temp);
+    }
 }
