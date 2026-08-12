@@ -24,3 +24,22 @@ int main(void) {
 
     return 0;
 }
+
+void init(list *list_of_tasks) {
+    list_of_tasks->head = NULL
+}
+
+task *create_node(char *descript) {
+    task *new_node = (task) malloc(sizeof(task));
+    strncpy(new_node->task_description, descript, sizeof(new_node->task));
+    new_node->task_description[sizeof(new_node->task) - 1] = '\0';
+    new_node->is_complete = 0;
+    new_node->next = NULL;
+
+    return new_node;
+}
+
+void add_to_front(task **head, task *task_to_add) {
+    task_to_add->next = *head;
+    *head = task_to_add;
+}
