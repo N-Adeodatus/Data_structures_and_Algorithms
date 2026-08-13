@@ -16,6 +16,11 @@ typedef struct list{
     page *tail;
 }
 
+void add_page_to_front(list **the_head, page *page_to_add);
+void display_from_beginning_to_end(page *the_head);
+void display_from_end_to_beginning(page *the_tail);
+int delete_page_by_name(list **the_head, page *page_to_delete);
+
 int main(void) {
     
 
