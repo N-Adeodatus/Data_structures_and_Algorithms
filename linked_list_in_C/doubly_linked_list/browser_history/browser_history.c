@@ -24,7 +24,53 @@ void display_from_end_to_beginning(page *the_tail);
 int delete_page_by_name(list *the_list, char *page_name_to_delete);
 
 int main(void) {
-    
+    list browser_history;
+
+    /* Initialize the browser history */
+    init(&browser_history);
+
+    /* Create page nodes */
+    page *page1 = create_page_node("Google");
+    page *page2 = create_page_node("YouTube");
+    page *page3 = create_page_node("GitHub");
+    page *page4 = create_page_node("Stack Overflow");
+
+    /* Check that all nodes were created successfully */
+    if (page1 == NULL || page2 == NULL ||
+        page3 == NULL || page4 == NULL)
+    {
+        printf("Failed to create a page node.\n");
+        return 1;
+    }
+
+    /* Add pages to the front of the history */
+    add_page_to_front(&browser_history, page1);
+    add_page_to_front(&browser_history, page2);
+    add_page_to_front(&browser_history, page3);
+    add_page_to_front(&browser_history, page4);
+
+    /* Display history from beginning to end */
+    printf("History from beginning to end:\n");
+    display_from_beginning_to_end(browser_history.head);
+
+    /* Display history from end to beginning */
+    printf("History from end to beginning:\n");
+    display_from_end_to_beginning(browser_history.tail);
+
+    /* Delete a page */
+    printf("Deleting YouTube...\n");
+    if (delete_page_by_name(&browser_history, "YouTube") == 0)
+    {
+        printf("Page not found.\n");
+    }
+
+    /* Display history after deletion */
+    printf("\nHistory after deletion:\n");
+    display_from_beginning_to_end(browser_history.head);
+
+    /* Display backwards again to verify prev links */
+    printf("History backwards after deletion:\n");
+    display_from_end_to_beginning(browser_history.tail);
 
     return 0;
 }
