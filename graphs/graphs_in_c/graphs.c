@@ -13,6 +13,7 @@ typedef struct edge_s
 
 void init_arrays(int dist[], int parent[], int source);
 int relax_edges(edge_t edges[], int num_edges, int dist[], int parent[]);
+void bellman_ford(edge_t edges[], int num_edges, int dist[], int parent[]);
 
 int main(void)
 {
@@ -32,6 +33,7 @@ int main(void)
     int source = 0;
 
     init_arrays(dist, parent, source);
+    bellman_ford(edges, num_edges, dist, parent);
 
     return (0);
 }
@@ -68,4 +70,17 @@ int relax_edges(edge_t edges[], int num_edges, int dist[], int parent[])
         }
     }
     return (updated);
+}
+
+void bellman_ford(edge_t edges[], int num_edges, int dist[], int parent[])
+{
+    int i;
+    int updated;
+
+    for (i = 0; i < NUM_VERTICES - 1; i++)
+    {
+        updated = relax_edges(edges, num_edges, dist, parent);
+        if (updated == 0)
+            break;
+    }
 }
