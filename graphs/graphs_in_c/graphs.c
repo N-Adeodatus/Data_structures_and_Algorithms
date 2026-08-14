@@ -15,6 +15,8 @@ void init_arrays(int dist[], int parent[], int source);
 int relax_edges(edge_t edges[], int num_edges, int dist[], int parent[]);
 void bellman_ford(edge_t edges[], int num_edges, int dist[], int parent[]);
 void print_distances(int dist[], int source);
+int has_negative_cycle(edge_t edges[], int num_edges, int dist[], int parent[]);
+void print_path(int parent[], int node);
 
 int main(void)
 {
@@ -32,10 +34,31 @@ int main(void)
     int dist[NUM_VERTICES];
     int parent[NUM_VERTICES];
     int source = 0;
+    int i;
 
     init_arrays(dist, parent, source);
     bellman_ford(edges, num_edges, dist, parent);
+
+    if (has_negative_cycle(edges, num_edges, dist, parent))
+    {
+        printf("Graph contains a negative-weight cycle!\n");
+        return (1);
+    }
+
     print_distances(dist, source);
+
+    printf("\nPaths from source %d:\n", source);
+    for (i = 0; i < NUM_VERTICES; i++)
+    {
+        if (dist[i] == INF)
+        {
+            printf("Node %d: unreachable\n", i);
+            continue;
+        }
+        printf("Node %d: ", i);
+        print_path(parent, i);
+        printf("\n");
+    }
 
     return (0);
 }
@@ -99,4 +122,19 @@ void print_distances(int dist[], int source)
         else
             printf("Node %d: %d\n", i, dist[i]);
     }
+}
+
+int has_negative_cycle(edge_t edges[], int num_edges, int dist[], int parent[])
+{
+    return (relax_edges(edges, num_edges, dist, parent));
+}
+
+void print_path(int parent[], int node)
+{
+    if (parent[node] != NO_PARENT)
+    {
+        print_path(parent, parent[node]);
+        printf(" -> ");
+    }
+    printf("%d", node);
 }
