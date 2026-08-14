@@ -12,6 +12,7 @@ typedef struct edge_s
 } edge_t;
 
 void init_arrays(int dist[], int parent[], int source);
+int relax_edges(edge_t edges[], int num_edges, int dist[], int parent[]);
 
 int main(void)
 {
@@ -45,4 +46,26 @@ void init_arrays(int dist[], int parent[], int source)
         parent[i] = NO_PARENT;
     }
     dist[source] = 0;
+}
+
+int relax_edges(edge_t edges[], int num_edges, int dist[], int parent[])
+{
+    int i;
+    int updated;
+    int u, v, w;
+
+    updated = 0;
+    for (i = 0; i < num_edges; i++)
+    {
+        u = edges[i].src;
+        v = edges[i].dest;
+        w = edges[i].weight;
+        if (dist[u] != INF && dist[u] + w < dist[v])
+        {
+            dist[v] = dist[u] + w;
+            parent[v] = u;
+            updated = 1;
+        }
+    }
+    return (updated);
 }
