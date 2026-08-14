@@ -14,6 +14,7 @@ typedef struct edge_s
 void init_arrays(int dist[], int parent[], int source);
 int relax_edges(edge_t edges[], int num_edges, int dist[], int parent[]);
 void bellman_ford(edge_t edges[], int num_edges, int dist[], int parent[]);
+void print_distances(int dist[], int source);
 
 int main(void)
 {
@@ -34,6 +35,7 @@ int main(void)
 
     init_arrays(dist, parent, source);
     bellman_ford(edges, num_edges, dist, parent);
+    print_distances(dist, source);
 
     return (0);
 }
@@ -82,5 +84,19 @@ void bellman_ford(edge_t edges[], int num_edges, int dist[], int parent[])
         updated = relax_edges(edges, num_edges, dist, parent);
         if (updated == 0)
             break;
+    }
+}
+
+void print_distances(int dist[], int source)
+{
+    int i;
+
+    printf("Shortest distances from source %d:\n", source);
+    for (i = 0; i < NUM_VERTICES; i++)
+    {
+        if (dist[i] == INF)
+            printf("Node %d: INF\n", i);
+        else
+            printf("Node %d: %d\n", i, dist[i]);
     }
 }
