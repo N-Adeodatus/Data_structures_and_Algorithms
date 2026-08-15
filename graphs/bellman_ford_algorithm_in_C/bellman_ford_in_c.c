@@ -51,6 +51,10 @@ int main(void) {
         print_path(previous, i);
         printf("\n");
     }
+    for(int i = 0; i < VER; i++) {
+        printf("(%d, %c), ", previous[i], 'A' + previous[i]);
+    }
+    printf("\n");
 
     return 0;
 }
