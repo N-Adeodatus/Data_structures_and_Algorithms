@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #define VER 4
 #define EDG 5
@@ -27,10 +26,13 @@ Processing:
 Output:
     - iterate over the dist array:
         - print distance from A to each vertex
+        - print the path taken to reach it
     
 */
 
-void bellman_ford(edge edges_arr[], int distances[]);
+void bellman_ford(edge edges_arr[], int distances[], int previous[]);
+void print_path(int previous[], int node);
+
 int main(void) {
     edge edges[] = {
         {0, 1, 4},   // A -> B
@@ -41,22 +43,33 @@ int main(void) {
     };
 
     int dist[] = {0, 999, 999, 999};
-    bellman_ford(edges, dist);
+    int previous[] = {-1, -1, -1, -1};
+    bellman_ford(edges, dist, previous);
     printf("__________Distances_________\n");
     for(int i = 0; i < VER; i++) {
-        printf("A -> %c = %d\n", 'A' + i, dist[i]);
+        printf("A -> %c = %d, path: ", 'A' + i, dist[i]);
+        print_path(previous, i);
+        printf("\n");
     }
 
     return 0;
 }
 
-void bellman_ford(edge edges_arr[], int distances[]){
+void bellman_ford(edge edges_arr[], int distances[], int previous[]){
     for(int i = 1; i < VER; i++) {
         for(int j = 0; j < EDG; j++) {
              if(distances[edges_arr[j].source] + edges_arr[j].weight < distances[edges_arr[j].destination]) {
                 distances[edges_arr[j].destination] = distances[edges_arr[j].source] + edges_arr[j].weight;
+                previous[edges_arr[j].destination] = edges_arr[j].source;
              }
         }
     }
 }
 
+void print_path(int previous[], int node) {
+    if (previous[node] != -1) {
+        print_path(previous, previous[node]);
+        printf(" -> ");
+    }
+    printf("%c", 'A' + node);
+}
