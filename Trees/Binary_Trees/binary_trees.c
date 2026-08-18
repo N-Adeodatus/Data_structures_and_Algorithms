@@ -31,6 +31,10 @@ int main(void)
     root->left->right = create_node(5);
     root->right->right = create_node(6);
 
+    printf("Preorder: ");
+    preorder(root);
+    printf("\n");
+
     return (0);
 }
 
@@ -48,4 +52,14 @@ node_t *create_node(int data)
     new_node->right = NULL;
 
     return (new_node);
+}
+
+void preorder(node_t *root)
+{
+    if (root == NULL)
+        return;
+
+    printf("%d ", root->data);
+    preorder(root->left);
+    preorder(root->right);
 }
