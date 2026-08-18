@@ -45,6 +45,7 @@ int main(void)
 
     printf("Height: %d\n", height(root));
     printf("Total nodes: %d\n", count_nodes(root));
+    printf("Leaf nodes: %d\n", count_leaves(root));
 
     return (0);
 }
@@ -115,4 +116,15 @@ int count_nodes(node_t *root)
         return (0);
 
     return (1 + count_nodes(root->left) + count_nodes(root->right));
+}
+
+int count_leaves(node_t *root)
+{
+    if (root == NULL)
+        return (0);
+
+    if (root->left == NULL && root->right == NULL)
+        return (1);
+
+    return (count_leaves(root->left) + count_leaves(root->right));
 }
