@@ -61,6 +61,9 @@ int main(void)
     else
         printf("Value not found\n");
 
+    free_tree(root);
+    root = NULL;
+
     return (0);
 }
 
@@ -166,4 +169,14 @@ node_t *search(node_t *root, int target)
         return (found);
 
     return (search(root->right, target));
+}
+
+void free_tree(node_t *root)
+{
+    if (root == NULL)
+        return;
+
+    free_tree(root->left);
+    free_tree(root->right);
+    free(root);
 }
