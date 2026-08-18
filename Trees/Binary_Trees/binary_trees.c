@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Struct definition */
+typedef struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+} node_t;
+
+/* Prototypes */
+node_t *create_node(int data);
+void preorder(node_t *root);
+void inorder(node_t *root);
+void postorder(node_t *root);
+int height(node_t *root);
+int count_nodes(node_t *root);
+int count_leaves(node_t *root);
+int sum_tree(node_t *root);
+node_t *search(node_t *root, int target);
+void free_tree(node_t *root);
+
+int main(void)
+{
+    return (0);
+}
+
+/* Function definitions will go here, one per step */
