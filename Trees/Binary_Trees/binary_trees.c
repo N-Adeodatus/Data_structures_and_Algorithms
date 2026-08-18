@@ -43,6 +43,9 @@ int main(void)
     postorder(root);
     printf("\n");
 
+    printf("Height: %d\n", height(root));
+    printf("Total nodes: %d\n", count_nodes(root));
+
     return (0);
 }
 
@@ -90,4 +93,26 @@ void postorder(node_t *root)
     postorder(root->left);
     postorder(root->right);
     printf("%d ", root->data);
+}
+
+int height(node_t *root)
+{
+    int left_height;
+    int right_height;
+
+    if (root == NULL)
+        return (-1);
+
+    left_height = height(root->left);
+    right_height = height(root->right);
+
+    return (1 + (left_height > right_height ? left_height : right_height));
+}
+
+int count_nodes(node_t *root)
+{
+    if (root == NULL)
+        return (0);
+
+    return (1 + count_nodes(root->left) + count_nodes(root->right));
 }
