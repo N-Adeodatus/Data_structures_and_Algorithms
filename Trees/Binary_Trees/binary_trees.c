@@ -39,6 +39,10 @@ int main(void)
     inorder(root);
     printf("\n");
 
+    printf("Postorder: ");
+    postorder(root);
+    printf("\n");
+
     return (0);
 }
 
@@ -76,4 +80,14 @@ void inorder(node_t *root)
     inorder(root->left);
     printf("%d ", root->data);
     inorder(root->right);
+}
+
+void postorder(node_t *root)
+{
+    if (root == NULL)
+        return;
+
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ", root->data);
 }
