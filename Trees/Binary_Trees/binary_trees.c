@@ -24,6 +24,7 @@ void free_tree(node_t *root);
 int main(void)
 {
     node_t *root = create_node(1);
+    node_t *result;
 
     root->left = create_node(2);
     root->right = create_node(3);
@@ -46,6 +47,19 @@ int main(void)
     printf("Height: %d\n", height(root));
     printf("Total nodes: %d\n", count_nodes(root));
     printf("Leaf nodes: %d\n", count_leaves(root));
+    printf("Sum of values: %d\n", sum_tree(root));
+
+    result = search(root, 5);
+    if (result != NULL)
+        printf("Found node with value: %d\n", result->data);
+    else
+        printf("Value not found\n");
+
+    result = search(root, 99);
+    if (result != NULL)
+        printf("Found node with value: %d\n", result->data);
+    else
+        printf("Value not found\n");
 
     return (0);
 }
@@ -127,4 +141,29 @@ int count_leaves(node_t *root)
         return (1);
 
     return (count_leaves(root->left) + count_leaves(root->right));
+}
+
+int sum_tree(node_t *root)
+{
+    if (root == NULL)
+        return (0);
+
+    return (root->data + sum_tree(root->left) + sum_tree(root->right));
+}
+
+node_t *search(node_t *root, int target)
+{
+    node_t *found;
+
+    if (root == NULL)
+        return (NULL);
+
+    if (root->data == target)
+        return (root);
+
+    found = search(root->left, target);
+    if (found != NULL)
+        return (found);
+
+    return (search(root->right, target));
 }
