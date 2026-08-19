@@ -18,6 +18,8 @@ struct node
 
 /* Function prototypes */
 struct node *new_node(int data);
+int height(struct node *n);
+int get_balance(struct node *n);
 
 int main(void)
 {
@@ -43,4 +45,32 @@ struct node *new_node(int data)
     n->height = 1;
 
     return (n);
+}
+
+/**
+ * height - safely get the height of a subtree
+ * @n: root of the subtree (may be NULL)
+ *
+ * Return: height of the subtree, or 0 if n is NULL
+ */
+int height(struct node *n)
+{
+    if (n == NULL)
+        return (0);
+
+    return (n->height);
+}
+
+/**
+ * get_balance - compute the balance factor of a node
+ * @n: node to check (may be NULL)
+ *
+ * Return: height(left) - height(right), or 0 if n is NULL
+ */
+int get_balance(struct node *n)
+{
+    if (n == NULL)
+        return (0);
+
+    return (height(n->left) - height(n->right));
 }
