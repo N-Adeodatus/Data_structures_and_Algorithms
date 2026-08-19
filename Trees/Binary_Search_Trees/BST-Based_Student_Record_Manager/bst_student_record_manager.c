@@ -20,6 +20,8 @@ struct node
 struct node *new_node(int id, float grade);
 struct node *insert(struct node *root, int id, float grade);
 void inorder_print(struct node *root);
+struct node *search(struct node *root, int id);
+struct node *find_min(struct node *root);
 
 int main(void)
 {
@@ -81,4 +83,39 @@ void inorder_print(struct node *root)
     inorder_print(root->left);
     printf("ID: %d, Grade: %.2f\n", root->id, root->grade);
     inorder_print(root->right);
+}
+
+/**
+ * search - find a student record by id
+ * @root: root of the (sub)tree to search
+ * @id: student id to find
+ *
+ * Return: pointer to the matching node, or NULL if not found
+ */
+struct node *search(struct node *root, int id)
+{
+    if (root == NULL || root->id == id)
+        return (root);
+
+    if (id < root->id)
+        return (search(root->left, id));
+
+    return (search(root->right, id));
+}
+
+/**
+ * find_min - find the node with the smallest id in a (sub)tree
+ * @root: root of the (sub)tree to search
+ *
+ * Return: pointer to the node with the smallest id, or NULL if empty
+ */
+struct node *find_min(struct node *root)
+{
+    if (root == NULL)
+        return (NULL);
+
+    while (root->left != NULL)
+        root = root->left;
+
+    return (root);
 }
