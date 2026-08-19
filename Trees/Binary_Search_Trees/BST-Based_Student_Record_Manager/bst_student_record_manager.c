@@ -23,6 +23,7 @@ void inorder_print(struct node *root);
 struct node *search(struct node *root, int id);
 struct node *find_min(struct node *root);
 struct node *delete_node(struct node *root, int id);
+void free_tree(struct node *root);
 
 int main(void)
 {
@@ -165,4 +166,18 @@ struct node *delete_node(struct node *root, int id)
     }
 
     return (root);
+}
+
+/**
+ * free_tree - free every node in the tree
+ * @root: root of the (sub)tree to free
+ */
+void free_tree(struct node *root)
+{
+    if (root == NULL)
+        return;
+
+    free_tree(root->left);
+    free_tree(root->right);
+    free(root);
 }
