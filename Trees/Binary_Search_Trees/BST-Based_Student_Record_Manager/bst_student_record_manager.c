@@ -22,6 +22,7 @@ struct node *insert(struct node *root, int id, float grade);
 void inorder_print(struct node *root);
 struct node *search(struct node *root, int id);
 struct node *find_min(struct node *root);
+struct node *delete_node(struct node *root, int id);
 
 int main(void)
 {
@@ -116,6 +117,52 @@ struct node *find_min(struct node *root)
 
     while (root->left != NULL)
         root = root->left;
+
+    return (root);
+}
+
+/**
+ * delete_node - delete a student record from the BST by id
+ * @root: root of the (sub)tree to delete from
+ * @id: student id to delete
+ *
+ * Return: pointer to the (possibly new) root of this subtree
+ */
+struct node *delete_node(struct node *root, int id)
+{
+    struct node *temp;
+
+    if (root == NULL)
+        return (root);
+
+    if (id < root->id)
+    {
+        root->left = delete_node(root->left, id);
+    }
+    else if (id > root->id)
+    {
+        root->right = delete_node(root->right, id);
+    }
+    else
+    {
+        if (root->left == NULL)
+        {
+            temp = root->right;
+            free(root);
+            return (temp);
+        }
+        else if (root->right == NULL)
+        {
+            temp = root->left;
+            free(root);
+            return (temp);
+        }
+
+        temp = find_min(root->right);
+        root->id = temp->id;
+        root->grade = temp->grade;
+        root->right = delete_node(root->right, temp->id);
+    }
 
     return (root);
 }
