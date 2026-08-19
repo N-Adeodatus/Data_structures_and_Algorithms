@@ -18,6 +18,8 @@ struct node
 
 /* Function prototypes */
 struct node *new_node(int id, float grade);
+struct node *insert(struct node *root, int id, float grade);
+void inorder_print(struct node *root);
 
 int main(void)
 {
@@ -44,4 +46,39 @@ struct node *new_node(int id, float grade)
     n->right = NULL;
 
     return (n);
+}
+
+/**
+ * insert - insert a new student record into the BST
+ * @root: root of the (sub)tree to insert into
+ * @id: student ID to insert (BST key)
+ * @grade: student grade to store
+ *
+ * Return: pointer to the (possibly new) root of this subtree
+ */
+struct node *insert(struct node *root, int id, float grade)
+{
+    if (root == NULL)
+        return (new_node(id, grade));
+
+    if (id < root->id)
+        root->left = insert(root->left, id, grade);
+    else if (id > root->id)
+        root->right = insert(root->right, id, grade);
+
+    return (root);
+}
+
+/**
+ * inorder_print - print all records in sorted order by id
+ * @root: root of the (sub)tree to print
+ */
+void inorder_print(struct node *root)
+{
+    if (root == NULL)
+        return;
+
+    inorder_print(root->left);
+    printf("ID: %d, Grade: %.2f\n", root->id, root->grade);
+    inorder_print(root->right);
 }
